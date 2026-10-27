@@ -769,7 +769,7 @@ function updateBar(){
     else if (k <= S.wo.items.length) done = S.wo.items[k-1].sets.every(s => s.done);
     el.className = k === i ? 'cur' : done ? 'done' : '';
   });
-  $('count').textContent = i === 0 ? 'Warm-up' : i === n-1 ? 'Finish' : `${i} / ${S.wo.items.length}`;
+  $('count').textContent = S.names[S.wo.who] + ' · ' + (i === 0 ? 'Warm-up' : i === n-1 ? 'Finish' : `${i}/${S.wo.items.length}`);
   $('prev').disabled = i === 0;
   $('next').textContent = i === n-2 ? 'Finish' : i === n-1 ? 'Save' : 'Next';
 }
@@ -924,7 +924,6 @@ $('sheetBg').addEventListener('click', ev => { if (ev.target === $('sheetBg')) $
 /* ---------- Boot ---------- */
 window.RepDeck = {EX, CARDIO, figSvg, figsFor};
 renderHome();
-if (S.wo) startWorkout(true);
 try{
   if ('serviceWorker' in navigator && location.protocol === 'https:' && !/claude/.test(location.hostname)) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
